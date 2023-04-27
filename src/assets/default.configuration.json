@@ -1,0 +1,31 @@
+{
+    "sites": {
+        "public.github": {
+            "type": "github",
+            "baseUrl": "https://github.com"
+        }
+    },
+    "surveys": {
+        "survey.nightwing.release": {
+            "type": "github:release",
+            "site": "public.github",
+            "reports": [
+                "my.googlechat.channel",
+                "my.smtp"
+            ]
+        }
+    },
+    "reports": {
+        "my.googlechat.channel": {
+            "type": "googlechat",
+            "webhook": "https://..."
+        },
+        "my.smtp": {
+            "type": "smtp",
+            "host": "smtp-mail.outlook.com",
+            "port": 587,
+            "username": "",
+            "password": ""
+        }
+    }
+}
