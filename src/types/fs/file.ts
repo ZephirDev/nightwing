@@ -22,4 +22,22 @@ export class File extends Path {
 
         fs.writeFileSync(this.toString(), data, "utf-8");
     }
+
+    copyTo(to: File)
+    {
+        for (const parent of [this.dirname(), to.dirname()]) {
+            parent.mkdirs();
+        }
+
+        fs.copyFileSync(this.toString(), to.toString());
+    }
+
+    delete()
+    {
+        if (!this.exists()) {
+            return;
+        }
+
+        fs.unlinkSync(this.toString());
+    }
 }

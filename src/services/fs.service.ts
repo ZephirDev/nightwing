@@ -14,4 +14,8 @@ export default new class implements ServiceInterface {
         return new File(join(NightwingEnvironment.CONFIUGRATION_FOLDER_PATH, NightwingEnvironment.CONFIUGRATION_FILENAME));
     }
 
+    getDatabaseFile(): File
+    {
+        return new File(join(NightwingEnvironment.CONFIUGRATION_FOLDER_PATH, NightwingEnvironment.DATABASE_FILENAME));
+    }
 }

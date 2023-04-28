@@ -5,9 +5,10 @@ import { stringify, parse } from 'yaml';
 import defaultConfiguration from '../assets/default.configuration.json';
 import fsService from "./fs.service";
 import { Logger } from "../logger";
+import { Configuration } from "../types/configuration";
 
 export default new class implements ServiceInterface {
-    private config: any;
+    private config: Configuration;
 
     async init(): Promise<void>
     {
@@ -20,4 +21,9 @@ export default new class implements ServiceInterface {
         this.config = parse(configurationFile.read());
     }
     
+    getConfiguration(): Configuration
+    {
+        return this.config;
+    }
+
 };

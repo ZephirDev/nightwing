@@ -2,13 +2,14 @@
     "sites": {
         "public.github": {
             "type": "github",
-            "baseUrl": "https://github.com"
+            "baseUrl": "https://api.github.com"
         }
     },
     "surveys": {
         "survey.nightwing.release": {
             "type": "github:release",
             "site": "public.github",
+            "project": "ZephirDev/nightwing",
             "reports": [
                 "my.googlechat.channel",
                 "my.smtp"

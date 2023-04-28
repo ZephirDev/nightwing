@@ -3,6 +3,7 @@ import defaultCommand from './commands/default.command';
 import { ServiceInterface } from './services/service.interface';
 import configurationService from './services/configuration.service';
 import fsService from './services/fs.service';
+import databaseService from './services/database.service';
 
 async function main(): Promise<void> {
     const commanderInstance = new Command();
@@ -15,6 +16,7 @@ async function main(): Promise<void> {
     const services: ServiceInterface[] = [
         fsService,
         configurationService,
+        databaseService,
     ];
     for (const service of services) {
         if (service.init) {
@@ -24,7 +26,7 @@ async function main(): Promise<void> {
 
     await commanderInstance.parseAsync();
 
-    for (const service of services) {
+    for (const service of services.reverse()) {
         if (service.destroy) {
             await service.destroy();
         }

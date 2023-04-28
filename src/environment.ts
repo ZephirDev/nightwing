@@ -2,12 +2,14 @@
 interface Environment {
     CONFIUGRATION_FOLDER_PATH: string;
     CONFIUGRATION_FILENAME: string;
+    DATABASE_FILENAME: string;
     LOGGER_LEVEL: string;
 };
 
 const Fallbacks: Environment = {
     CONFIUGRATION_FOLDER_PATH: `${process.env.HOME}/.config/nightwing`,
     CONFIUGRATION_FILENAME: 'configuration.yaml',
+    DATABASE_FILENAME: 'nightwing.db',
     LOGGER_LEVEL: 'info',
 };
 
@@ -21,6 +23,7 @@ function envOrFallback(name: string, value: string): string {
 const EnvironmentHandlers: { [key in keyof Environment]: (name: string, value: string) => Environment[key] } = {
     CONFIUGRATION_FOLDER_PATH: envOrFallback,
     CONFIUGRATION_FILENAME: envOrFallback,
+    DATABASE_FILENAME: envOrFallback,
     LOGGER_LEVEL: envOrFallback,
 };
 
