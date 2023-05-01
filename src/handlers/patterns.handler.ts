@@ -1,6 +1,6 @@
 import { BasicReport } from "../types/reports/basic.report";
 import { Message } from "../types/reports/message";
-import * as handelbars from 'handlebars';
+import * as Handlebars from 'handlebars';
 import * as crypto from 'crypto';
 import fsService from "../services/fs.service";
 import defaultReportTitleTemplate from '../assets/default.report.title.template.json';
@@ -8,11 +8,11 @@ import defaultReportContentTemplate from '../assets/default.report.content.templ
 import lengthHelper from "../handlebars/helpers/length.helper";
 
 export default new class {
-    private cachedTemplate: { [name: string]: HandlebarsTemplateDelegate };
+    private cachedTemplate: { [name: string]: HandlebarsTemplateDelegate } = {};
 
     constructor()
     {
-        handelbars.registerHelper('length', lengthHelper);
+        Handlebars.registerHelper('length', lengthHelper);
     }
 
     private hashString(content: string): string

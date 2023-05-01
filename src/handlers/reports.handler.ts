@@ -7,6 +7,7 @@ import * as nodemailer from 'nodemailer';
 import SMTPConnection from "nodemailer/lib/smtp-connection";
 import patternsHandler from "./patterns.handler";
 import { GoogleChatClient } from "../types/clients/googlechat.client";
+import { Logger } from "../logger";
 
 export default new class {
     private configuration: Configuration;
@@ -22,6 +23,8 @@ export default new class {
 
     private async reportSmtp(name: string, report: SmtpReport, messages: Message[]): Promise<void>
     {
+        Logger.info(`Report messages trough ${report.host} smtp`);
+
         let auth: SMTPConnection.AuthenticationType | null;
         if (report.username || report.password) {
             auth = {

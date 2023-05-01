@@ -41,6 +41,7 @@ export default new class {
             }
         }
 
+        Logger.info(`Send messages to reports.`);
         await reportsHandler.reports(reportsMessageByChannel);
     }
 
