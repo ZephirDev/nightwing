@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Command } from 'commander';
 import defaultCommand from './commands/default.command';
 import { ServiceInterface } from './services/service.interface';

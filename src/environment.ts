@@ -10,7 +10,13 @@ interface Environment {
 };
 
 const Fallbacks: Environment = {
-    CONFIUGRATION_FOLDER_PATH: `${process.env.HOME}/.config/nightwing`,
+    CONFIUGRATION_FOLDER_PATH: (() => {
+        if (process.env.SNAP_NAME) {
+            // Detect we are seal inside a snap package
+            return process.env.HOME;
+        }
+        return `${process.env.HOME}/.config/nightwing`;
+    })(),
     CONFIUGRATION_FILENAME: 'configuration.yaml',
     DATABASE_FILENAME: 'nightwing.db',
     LOGGER_LEVEL: 'info',

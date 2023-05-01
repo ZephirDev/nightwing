@@ -2,9 +2,12 @@
   "name": "nightwing",
   "version": "1.0.0",
   "description": "It's a small application to watch some service. It will notify the user when it's neccessary.",
-  "main": "index.js",
+  "main": "nightwing.js",
+  "bin": {
+    "nightwing": "nightwing.js"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "snap": "./scripts/snap.sh"
   },
   "keywords": [
     "Notification",
@@ -13,9 +16,14 @@
   "author": "ZephyrDevelop",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^18.16.3",
     "@types/nodemailer": "^6.4.7",
+    "ts-loader": "^9.4.2",
     "ts-node": "^10.9.1",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2",
+    "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
     "axios": "^1.4.0",

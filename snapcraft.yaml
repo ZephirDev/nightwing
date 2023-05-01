@@ -1,0 +1,26 @@
+name: nightwing
+version: 2023.1.0
+summary: Local service that watch remote service project and made you reports.
+description: |
+  It's a small local service that watch remote service project and made you report on multiple endpoint.
+  You can change the configuration inside the $HOME/snap/nightwing folder.
+  Please look the github project you will found all the posssibility of this tool.
+issues: https://github.com/ZephirDev/nightwing/issues
+website: https://github.com/ZephirDev/nightwing
+
+confinement: strict
+base: core20
+
+apps:
+  cli:
+    command: bin/nightwing
+  daemon:
+    command: bin/nightwing
+    daemon: oneshot
+    timer: 00:00
+
+parts:
+  nightwing:
+    plugin: npm
+    npm-node-version: 14.17.3
+    source: .
