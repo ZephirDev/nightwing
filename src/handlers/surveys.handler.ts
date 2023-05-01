@@ -1,9 +1,12 @@
+import { Logger } from "../logger";
 import configurationService from "../services/configuration.service";
 import databaseService from "../services/database.service";
 import { GithubClient } from "../types/clients/github.client";
 import { Configuration } from "../types/configuration";
+import { Message } from "../types/reports/message";
 import { GitHubSite } from "../types/sites/github.site";
 import { GitHubTagsSurvey } from "../types/surveys/github-tags.survey";
+import reportsHandler from "./reports.handler";
 
 export default new class {
     private configuration: Configuration;
@@ -14,27 +17,31 @@ export default new class {
             this.configuration = configurationService.getConfiguration();
         }
 
-        const reportsMessageByChannel: {[report: string]: string[]} = {};
+        const reportsMessageByChannel: {[report: string]: Message[]} = {};
 
         for (const surveyName of Object.keys(this.configuration.surveys)) {
+            Logger.info(`Handle ${surveyName} survey`);
             const survey = this.configuration.surveys[surveyName];
             
-            let message: string; 
+            let message: Message;
             if ('github:release' === survey.type) {
                 message = await this.handleGitHubReleaseSurvey(survey);
             }
 
             if (message) {
+                Logger.info(`The ${surveyName} survey has generate a message to send.`);
                 for (const report of survey.reports) {
-                    if (reportsMessageByChannel[report]) {
+                    if (!reportsMessageByChannel[report]) {
                         reportsMessageByChannel[report] = [];
                     }
                     reportsMessageByChannel[report].push(message);
                 }
+            } else {
+                Logger.info(`The ${surveyName} survey doesn't return a message to send.`);
             }
         }
 
-        // TODO handle reporting
+        await reportsHandler.reports(reportsMessageByChannel);
     }
 
     async getSite(key: string, type?: string)
@@ -51,7 +58,7 @@ export default new class {
         return site;
     }
 
-    async handleGitHubReleaseSurvey(githubReleaseSurvey: GitHubTagsSurvey): Promise<string|null>
+    async handleGitHubReleaseSurvey(githubReleaseSurvey: GitHubTagsSurvey): Promise<Message|null>
     {
         const githubSite = await this.getSite(githubReleaseSurvey.site, 'github') as GitHubSite;
         const client = new GithubClient(githubSite);
@@ -65,10 +72,17 @@ export default new class {
 
         const name = tags[0].name;
         if (lastTag === name) {
+            Logger.info(`The ${githubReleaseSurvey.project} github has no new tags so no report will be send.`);
             return null;
         }
 
         await databaseService.setLastTagVersion(githubReleaseSurvey.project, name);
-        return `The github has release a new tag (${name}) on ${githubReleaseSurvey.project} github project.`;
+        Logger.info(`The ${githubReleaseSurvey.project} github has a new tag so we will report this.`);
+        return {
+            content: `The github has release a new tag (${name}) on ${githubReleaseSurvey.project} github project.`,
+            links: {
+                project: `https://github.com/${githubReleaseSurvey.project}`,
+            },
+        };
     }
 };

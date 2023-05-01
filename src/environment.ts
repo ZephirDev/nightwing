@@ -4,6 +4,9 @@ interface Environment {
     CONFIUGRATION_FILENAME: string;
     DATABASE_FILENAME: string;
     LOGGER_LEVEL: string;
+    REPORT_TEMPLATE_FOLDER: string;
+    DEFAULT_REPORT_TITLE_TEMPLATE_FILE: string;
+    DEFAULT_REPORT_CONTENT_TEMPLATE_FILE_PATTERN: string;
 };
 
 const Fallbacks: Environment = {
@@ -11,6 +14,9 @@ const Fallbacks: Environment = {
     CONFIUGRATION_FILENAME: 'configuration.yaml',
     DATABASE_FILENAME: 'nightwing.db',
     LOGGER_LEVEL: 'info',
+    REPORT_TEMPLATE_FOLDER: 'reports.template.d',
+    DEFAULT_REPORT_TITLE_TEMPLATE_FILE: 'default.title.template',
+    DEFAULT_REPORT_CONTENT_TEMPLATE_FILE_PATTERN: 'default.%s.template',
 };
 
 function envOrFallback(name: string, value: string): string {
@@ -25,6 +31,9 @@ const EnvironmentHandlers: { [key in keyof Environment]: (name: string, value: s
     CONFIUGRATION_FILENAME: envOrFallback,
     DATABASE_FILENAME: envOrFallback,
     LOGGER_LEVEL: envOrFallback,
+    REPORT_TEMPLATE_FOLDER: envOrFallback,
+    DEFAULT_REPORT_TITLE_TEMPLATE_FILE: envOrFallback,
+    DEFAULT_REPORT_CONTENT_TEMPLATE_FILE_PATTERN: envOrFallback,
 };
 
 export const NightwingEnvironment: Environment = (() => {

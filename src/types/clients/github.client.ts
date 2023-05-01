@@ -1,6 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import { AxiosInstance } from "axios";
 import { GitHubSite } from "../sites/github.site";
-import { Logger } from "../../logger";
+import httpClientHandler from "../../handlers/http-client.handler";
 
 export class GithubClient {
     private httpClient: AxiosInstance;
@@ -9,12 +9,8 @@ export class GithubClient {
         private githubSite: GitHubSite,
     )
     {
-        this.httpClient = axios.create({
+        this.httpClient = httpClientHandler.create({
             baseURL: githubSite.baseUrl,
-        });
-        this.httpClient.interceptors.request.use((request: InternalAxiosRequestConfig) => {
-            Logger.debug(`[GITHUB] ${request.method} ${request.url}`);
-            return request;
         });
     }
 

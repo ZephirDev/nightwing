@@ -1,0 +1,38 @@
+{
+    "googlechat": [
+        "Nightwing report you this:",
+        "",
+        "{{#each messages}}",
+        "<b>#{{@index}}</b>",
+        "",
+        "{{this.content}}",
+        "{{#if this.links}}",
+        "<b>Links:</b>",
+        "",
+        "{{#each this.links}}",
+        "- <a href=\"{{this}}\">{{@key}}</a>",
+        "{{/each}}",
+        "",
+        "{{/if}}",
+        "{{/each}}"
+    ],
+    "smtp": [
+        "<pre>",
+        "Nightwing report you this:",
+        "",
+        "{{#each messages}}",
+        "<b>#{{@index}}</b>",
+        "",
+        "{{this.content}}",
+        "{{#if this.links}}",
+        "<b>Links:</b>",
+        "",
+        "{{#each this.links}}",
+        "- <a href=\"{{this}}\">{{@key}}</a>",
+        "{{/each}}",
+        "",
+        "{{/if}}",
+        "{{/each}}",
+        "</pre>"
+    ]
+}
