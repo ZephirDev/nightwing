@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Lancer le programme",
+            "name": "surveys",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -17,6 +17,27 @@
             ],
             "cwd": "${workspaceFolder}",
             "program": "src/main.ts",
+            "outputCapture": "std",
+            "env": {
+                "LOGGER_LEVEL": "debug"
+            }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "reports:test",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "runtimeExecutable": "node",
+            "runtimeArgs": [
+                "--require", "ts-node/register"
+            ],
+            "cwd": "${workspaceFolder}",
+            "program": "src/main.ts",
+            "args": [
+                "reports:test"
+            ],
             "outputCapture": "std",
             "env": {
                 "LOGGER_LEVEL": "debug"
