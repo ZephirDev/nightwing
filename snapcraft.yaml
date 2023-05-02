@@ -1,5 +1,5 @@
 name: nightwing
-version: 2023.1.0
+version: 2023.1.1
 summary: Local service that watch remote service project and made you reports.
 description: |
   It's a small local service that watch remote service project and made you report on multiple endpoint.
@@ -14,10 +14,14 @@ base: core20
 apps:
   cli:
     command: bin/nightwing
+    plugs:
+      - network
   daemon:
     command: bin/nightwing
     daemon: oneshot
     timer: 00:00
+    plugs:
+      - network
 
 parts:
   nightwing:

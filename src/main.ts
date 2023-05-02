@@ -6,11 +6,13 @@ import { ServiceInterface } from './services/service.interface';
 import configurationService from './services/configuration.service';
 import fsService from './services/fs.service';
 import databaseService from './services/database.service';
+import reportsTestCommand from './commands/reports-test.command';
 
 async function main(): Promise<void> {
     const commanderInstance = new Command();
     for (let command of [
         defaultCommand,
+        reportsTestCommand,
     ]) {
         await command(commanderInstance);
     }

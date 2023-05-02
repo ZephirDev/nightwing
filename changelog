@@ -1,0 +1,12 @@
+## 2023.1.0
+
+- Add snapcraft build script
+- Add report throught google chat chanel
+- Add report throught smtp
+- Add survey on release tag of github project
+
+## 2023.1.1
+
+- Fix 2023.1.0 snapcraft isolation by adding network plugin into snapcraft.yaml
+- Add a test command for the reports configuration
+- Fix Google Chat report with the definition of the CardsV2 api

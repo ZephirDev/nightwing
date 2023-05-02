@@ -17,13 +17,13 @@ export class GoogleChatClient {
     async sendMessage(title: string, body: string): Promise<void>
     {
         const response = await this.httpClient.post('', {
-            cards: [
+            cardsV2: [
                 {
                     card: {
                         header: {
                             title,
                         },
-                        sections: {
+                        sections: [{
                             widgets: [
                                 {
                                     textParagraph: {
@@ -31,7 +31,7 @@ export class GoogleChatClient {
                                     }
                                 }
                             ]
-                        }
+                        }]
                     }
                 }
             ]

@@ -17,6 +17,9 @@
             ],
             "cwd": "${workspaceFolder}",
             "program": "src/main.ts",
+            "args": [
+                "reports:test"
+            ],
             "outputCapture": "std",
             "env": {
                 "LOGGER_LEVEL": "debug"
